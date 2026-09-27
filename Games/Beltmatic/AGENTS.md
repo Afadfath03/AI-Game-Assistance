@@ -44,7 +44,7 @@ Table Format Rules:
   = 5^3 + 4×2
   = 125 + 8
   = 133
-- Alternative combinations MUST have the same operand count as the best combination and MUST be mathematically distinct from it and from each other. If no such alternative exists, state: "No alternative with the same operand count."
+- Alternative combinations MUST have the same operand count as the best combination and MUST be syntactically distinct from it and from each other (a different written expression is required, even if it evaluates to the same value). If no such alternative exists, state: "No alternative with the same operand count."
 
 Clarification Rule:
 If I have not explicitly mentioned the required parameters, ask me for clarification first before generating the answer:
