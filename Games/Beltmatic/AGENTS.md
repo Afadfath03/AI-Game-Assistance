@@ -1,25 +1,26 @@
 I want to find the most optimal number combination to reach a target number.
 
 Basic Rules:
-1. Allowed mathematical operations are defined by the user (default: addition (+)).
+1. Allowed mathematical operations are defined by the user (default: addition (+)). The complete set of recognized operations is: `+` (addition), `-` (subtraction), `×` (multiplication), `÷` (division), `^` (exponentiation).
 2. Allowed base numbers are defined by the user (default: one (1)).
 
 Operand Definition:
 - Every literal number in the expression counts as one operand, regardless of its position.
-- Symbols (=, +, ×, ^, and parentheses) do NOT count as operands.
+- Symbols (=, +, -, ×, ÷, ^, and parentheses) do NOT count as operands.
 - A base number may be reused any number of times unless the user states a usage limit.
 - Optimality Criteria rule 1 (SMALLEST COUNT OF NUMBERS) takes absolute priority over rule 2 (Operation Hierarchy). The hierarchy only breaks ties between combinations that already share the same operand count.
 
 Evaluation Order:
-- Exponentiation (^) is evaluated first, then multiplication (×), then addition (+).
-- Exponentiation is right-associative: 2^3^2 = 2^(3^2) = 512.
+- Exponentiation (^) is evaluated first, then multiplication (×) and division (÷) at the same level (left to right), then addition (+) and subtraction (-) at the same level (left to right).
+- Exponentiation is right-associative: 2^3^2 = 2^(3^2) = 512. Multiplication, division, addition, and subtraction are left-associative: 8 ÷ 2 ÷ 2 = 2, 8 - 2 - 2 = 4.
 - Parentheses may be used to override this order.
-- Use the `×` symbol (never the letter `x`) for multiplication, and `^` for exponentiation, in all output.
+- Use the `×` symbol (never the letter `x`) for multiplication, `^` for exponentiation, `÷` for division, and `-` for subtraction, in all output.
+- When `-` or `÷` is allowed, intermediate results may be negative or fractional, but the final result MUST still equal the target exactly.
 
 Optimality Criteria (Main Rules):
 1. SMALLEST COUNT OF NUMBERS IS BEST: The combination using the fewest total operands is absolute top priority. (Note: For powers like A^B, both A and B count as separate operands).
-2. Operation Hierarchy: Prioritize exponentiation (^) first to grow values rapidly, followed by multiplication (×), then addition (+).
-3. No Redundant Operations: Do not use power of 1 (N^1), multiplication by 1 (N × 1), or addition of 0 (N + 0) unless strictly required.
+2. Operation Hierarchy: Prioritize in this order: exponentiation (^) to grow values rapidly, then multiplication (×), then addition (+), then division (÷), then subtraction (-). Only operations the user allows may be used.
+3. No Redundant Operations: Do not use power of 1 (N^1), multiplication or division by 1 (N × 1, N ÷ 1), or addition or subtraction of 0 (N + 0, N - 0) unless strictly required.
 4. Tie-Breaker Priority: If multiple combinations share the exact same operand count, apply in order: (a) prefer the larger base number, (b) if still tied, prefer the closer factor balance.
 5. Exact Target Match: The calculated result must strictly equal the target number without exceeding or rounding.
 6. No Solution Rule: If no valid combination reaches the target, say so explicitly and name which operation or base number is missing. NEVER invent, round, or approximate a combination to fit the target. Then offer the closest reachable value as a reference.
@@ -38,12 +39,11 @@ Required Response Format:
 
 Table Format Rules:
 - Columns MUST ONLY BE: Combination | Number Count | Explanation | Status
+- The "Combination" column MUST ONLY shown raw value, for example 5×5×5+5 not (5×5)×5+5
 - The "Status" column MUST ONLY contain `BEST` or `ALTERNATIVE`.
 - The "Explanation" column MUST ONLY contain step-by-step mathematical calculations without descriptive text. Separate steps with `<br>`.
   Example explanation format:
-  = 5^3 + 4×2
-  = 125 + 8
-  = 133
+  = 5^3 + 4×2 = 125 + 8 = 133
 - Alternative combinations MUST have the same operand count as the best combination and MUST be syntactically distinct from it and from each other (a different written expression is required, even if it evaluates to the same value). If no such alternative exists, state: "No alternative with the same operand count."
 
 Clarification Rule:
