@@ -71,6 +71,6 @@ No 2-operand form reaches 12 (the 2-operand values available are 4, 5, 6, 8, 9, 
 
 | Combination | Number Count | Explanation | Status |
 |---|---|---|---|
-| 2^2×3 | 3 | = 2^2×3<br>= 4×3<br>= 12 | BEST |
-| 3×2^2 | 3 | = 3×2^2<br>= 3×4<br>= 12 | BEST (OTHER FORM) |
-| 3^2+3 | 3 | = 3^2+3<br>= 9+3<br>= 12 | ALTERNATIVE |
+| 2^2×3 | 3 | = 2^2×3 = 4×3 = 12 | BEST |
+| 3×2^2 | 3 | = 3×2^2 = 3×4 = 12 | BEST (OTHER FORM) |
+| 3^2+3 | 3 | = 3^2+3 = 9+3 = 12 | ALTERNATIVE |
