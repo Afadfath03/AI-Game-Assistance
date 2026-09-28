@@ -34,17 +34,23 @@ Required Response Format:
 1. Show allowed operations
 2. Show allowed base numbers
 3. Provide the best combination
-4. Provide alternative best combinations
-5. Comparison table (MAXIMUM 5 DATA ROWS, excluding the header)
+4. Provide additional combinations: BEST (OTHER FORM) and ALTERNATIVE
+5. Comparison table (MINIMUM 3 DATA ROWS when available, MAXIMUM 5 DATA ROWS, excluding the header)
 
 Table Format Rules:
 - Columns MUST ONLY BE: Combination | Number Count | Explanation | Status
 - The "Combination" column MUST ONLY shown raw value, for example 5×5×5+5 not (5×5)×5+5
-- The "Status" column MUST ONLY contain `BEST` or `ALTERNATIVE`.
+- The "Status" column MUST ONLY contain `BEST`, `BEST (OTHER FORM)`, or `ALTERNATIVE`. Use `BEST` for the primary combination only.
 - The "Explanation" column MUST ONLY contain step-by-step mathematical calculations without descriptive text. Separate steps with `<br>`.
   Example explanation format:
   = 5^3 + 4×2 = 125 + 8 = 133
-- Alternative combinations MUST have the same operand count as the best combination and MUST be syntactically distinct from it and from each other (a different written expression is required, even if it evaluates to the same value). If no such alternative exists, state: "No alternative with the same operand count."
+- Every row other than `BEST` MUST have the same operand count as the best combination. Classify each row by comparing its set of numbers (counting repetitions) against the best combination:
+  - Same numbers as the best combination, only written or ordered differently, same result → `BEST (OTHER FORM)`. Example: if the best combination is 5×5+5, then 5+5×5 is `BEST (OTHER FORM)`, not `ALTERNATIVE`.
+  - Different numbers from the best combination → `ALTERNATIVE`. Example: if the best combination is 4×4, then 2^4 is `ALTERNATIVE`.
+- Row Order: always order rows `BEST`, then `BEST (OTHER FORM)`, then `ALTERNATIVE`, then any remaining valid rows.
+- Row Count: the table MUST contain at least 3 data rows when that many are available, and at most 5. Default to 1 `BEST (OTHER FORM)` row and 1 `ALTERNATIVE` row. If the table still has room below 5 rows and other valid combinations remain, keep adding rows in this order: further `ALTERNATIVE` rows, then further `BEST (OTHER FORM)` rows. Never add a row just to fill the table. When a row type is unavailable, omit it instead of substituting another type.
+- Two rows MUST NOT be rearrangements of each other by commutativity or associativity (for example, 5×5+5 and 5+5×5 can never both appear as separate rows).
+- If no additional row can be listed at all, state: "No other combination with the same operand count."
 
 Clarification Rule:
 If I have not explicitly mentioned the required parameters, ask me for clarification first before generating the answer:
@@ -53,18 +59,18 @@ If I have not explicitly mentioned the required parameters, ask me for clarifica
 - What operations are allowed? (Ask if not provided)
 - Does the allowed base number range also restrict the exponent in a power such as A^B? (Ask only if the answer uses an exponent)
 
-Worked Example (target = 16, base numbers = {2, 4}, operations = {^, ×}):
+Worked Example (target = 12, base numbers = {2, 3}, operations = {+, ×, ^}):
 
-**Allowed Operations:** ^ (exponentiation), × (multiplication)
-**Allowed Base Numbers:** 2, 4
+**Allowed Operations:** + (addition), × (multiplication), ^ (exponentiation)
+**Allowed Base Numbers:** 2, 3
 
-**Best Combination:** 4×4
-No 1-operand form reaches 16 (2 and 4 are the only single operands), so 2 operands is minimal.
+**Best Combination:** 2^2×3
+No 2-operand form reaches 12 (the 2-operand values available are 4, 5, 6, 8, 9, 27), so 3 operands is minimal. It also uses the highest-ranked allowed operations (^ then ×).
 
-**Alternative Best Combinations:** 2^4, 4^2
+**Additional Combinations:** 3×2^2 (BEST (OTHER FORM), same numbers as the best), 3^2+3 (ALTERNATIVE, different numbers)
 
 | Combination | Number Count | Explanation | Status |
 |---|---|---|---|
-| 4×4 | 2 | = 4×4<br>= 16 | BEST |
-| 2^4 | 2 | = 2^4<br>= 16 | ALTERNATIVE |
-| 4^2 | 2 | = 4^2<br>= 16 | ALTERNATIVE |
+| 2^2×3 | 3 | = 2^2×3<br>= 4×3<br>= 12 | BEST |
+| 3×2^2 | 3 | = 3×2^2<br>= 3×4<br>= 12 | BEST (OTHER FORM) |
+| 3^2+3 | 3 | = 3^2+3<br>= 9+3<br>= 12 | ALTERNATIVE |
