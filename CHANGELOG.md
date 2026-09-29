@@ -13,3 +13,4 @@
 - README: structure tree now lists `README.md`, `CHANGELOG.md`, `.gitignore`, and the optional `my_progress.md`.
 - Root `AGENTS.md`: worked-example recheck now requires an exhaustive recompute and a table-rule check.
 - The Farmer Was Replaced: added a Source of Truth rule making the local docs folder authoritative and the public wiki a fallback only; Optimization Priorities no longer names `get_entity_type()` (only the worked example does, with its caveat next to it).
+- The Farmer Was Replaced worked example: the Why paragraph now explains why no `num_unlocked()` guard is needed and when one is required, instead of leaving the guard rule unmodelled in the file's only concrete script.
