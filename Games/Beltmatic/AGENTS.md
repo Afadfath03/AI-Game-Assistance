@@ -9,7 +9,6 @@ Operand Definition:
 - Every literal number in the expression counts as one operand, regardless of its position.
 - Symbols (=, +, -, ×, ÷, ^, and parentheses) do NOT count as operands.
 - A base number may be reused any number of times unless the user states a usage limit.
-- Optimality Criteria rule 1 (SMALLEST COUNT OF NUMBERS) takes absolute priority over rule 2 (Operation Hierarchy). The hierarchy only breaks ties between combinations that already share the same operand count.
 
 Evaluation Order:
 - Exponentiation (^) is evaluated first, then multiplication (×) and division (÷) at the same level (left to right), then addition (+) and subtraction (-) at the same level (left to right).
@@ -21,6 +20,7 @@ Evaluation Order:
 Optimality Criteria (Main Rules):
 1. SMALLEST COUNT OF NUMBERS IS BEST: The combination using the fewest total operands is absolute top priority. (Note: For powers like A^B, both A and B count as separate operands).
 2. Operation Hierarchy: The ranking is exponentiation (^) > multiplication (×) > addition (+) > division (÷) > subtraction (-). Only operations the user allows may be used. To compare two combinations with the same operand count, compare how many times each uses each operation, in rank order: the one with more `^` wins; if equal, the one with more `×`; then more `+`; then more `÷`; then more `-`.
+   - Priority note: rule 1 (SMALLEST COUNT OF NUMBERS) takes absolute priority over this rule. The hierarchy only breaks ties between combinations that already share the same operand count.
 3. No Redundant Operations: Do not use power of 1 (N^1), multiplication or division by 1 (N × 1, N ÷ 1), or addition or subtraction of 0 (N + 0, N - 0) unless strictly required.
 4. Tie-Breaker Priority: Only if rules 1 and 2 leave combinations tied, apply in order: (a) prefer the larger base number (compare the largest base number each uses), (b) if still tied, prefer the closer factor balance.
 5. Exact Target Match: The calculated result must strictly equal the target number without exceeding or rounding.
