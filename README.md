@@ -30,7 +30,7 @@ The root `AGENTS.md` acts as a router. When a game is mentioned, the AI reads th
 
 ## Tool Compatibility
 
-- **OpenCode** reads `AGENTS.md` natively ([OpenCode](https://github.com/opencode-ai/opencode)).
+- **OpenCode** reads `AGENTS.md` natively ([OpenCode](https://github.com/anomalyco/opencode/)).
 - **Claude Code** reads `CLAUDE.md`, not `AGENTS.md`. The included `CLAUDE.md` imports `AGENTS.md` so both stay in sync.
 - **Chat-only tools without file access**: paste or upload the relevant game's `AGENTS.md` at the start of the conversation.
 
