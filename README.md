@@ -12,7 +12,7 @@ CHANGELOG.md
 .gitignore
 Games/
 └── <GameName>/
-    ├── AGENTS.md
+    ├── AGENTS.md        (instructions set for AI)
     └── my_progress.md   (optional, git-ignored)
 ```
 
