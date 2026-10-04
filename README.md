@@ -44,4 +44,3 @@ The root `AGENTS.md` acts as a router. When a game is mentioned, the AI reads th
 ## Notes
 
 - `Games/*/my_progress.md` holds personal save progress and is excluded from git.
-- No license file is included yet.
